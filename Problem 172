@@ -1,0 +1,85 @@
+#include <bits/stdc++.h>
+using namespace std;
+long long  dp[50][4][4][4][4][4][4][4][4][4][4];
+
+long long solve(int ind,int a,int b,int c,int d,int e,int f,int g,int h,int ii,int j){
+    if(dp[ind][a][b][c][d][e][f][g][h][ii][j]!=-1){
+        return dp[ind][a][b][c][d][e][f][g][h][ii][j];
+    }
+    if(ind==18){
+        return 1;
+    }
+    long long ans=0;
+    for(int i=0;i<=9;i++){
+        if(i==0&&a<3){
+            ans+=solve(ind+1,a+1,b,c,d,e,f,g,h,ii,j);
+        }
+        if(i==1&&b<3){
+            ans+=solve(ind+1,a,b+1,c,d,e,f,g,h,ii,j);
+        }
+        if(i==2&&c<3){
+            ans+=solve(ind+1,a,b,c+1,d,e,f,g,h,ii,j);
+        }
+        if(i==3&&d<3){
+            ans+=solve(ind+1,a,b,c,d+1,e,f,g,h,ii,j);
+        }
+        if(i==4&&e<3){
+            ans+=solve(ind+1,a,b,c,d,e+1,f,g,h,ii,j);
+        }
+        if(i==5&&f<3){
+            ans+=solve(ind+1,a,b,c,d,e,f+1,g,h,ii,j);
+        }
+        if(i==6&&g<3){
+            ans+=solve(ind+1,a,b,c,d,e,f,g+1,h,ii,j);
+        }
+        if(i==7&&h<3){
+            ans+=solve(ind+1,a,b,c,d,e,f,g,h+1,ii,j);
+        }
+        if(i==8&&ii<3){
+            ans+=solve(ind+1,a,b,c,d,e,f,g,h,ii+1,j);
+        }
+        if(i==9&&j<3){
+            ans+=solve(ind+1,a,b,c,d,e,f,g,h,ii,j+1);
+        }
+    }
+    return dp[ind][a][b][c][d][e][f][g][h][ii][j]=ans;
+}
+int main()
+{
+    memset(dp,-1,sizeof(dp));
+    long long ans=0;
+   for(int i=1;i<=9;i++){
+        if(i==0){
+            ans+=solve(1,1,0,0,0,0,0,0,0,0,0);
+        }
+        if(i==1){
+            ans+=solve(1,0,1,0,0,0,0,0,0,0,0);
+        }
+        if(i==2){
+            ans+=solve(1,0,0,1,0,0,0,0,0,0,0);
+        }
+        if(i==3){
+            ans+=solve(1,0,0,0,1,0,0,0,0,0,0);
+        }
+        if(i==4){
+            ans+=solve(1,0,0,0,0,1,0,0,0,0,0);
+        }
+        if(i==5){
+            ans+=solve(1,0,0,0,0,0,1,0,0,0,0);
+        }
+        if(i==6){
+            ans+=solve(1,0,0,0,0,0,0,1,0,0,0);
+        }
+        if(i==7){
+            ans+=solve(1,0,0,0,0,0,0,0,1,0,0);
+        }
+        if(i==8){
+            ans+=solve(1,0,0,0,0,0,0,0,0,1,0);
+        }
+        if(i==9){
+            ans+=solve(1,0,0,0,0,0,0,0,0,0,1);
+        }
+    }
+    cout<<ans<<endl;
+    return 0;
+}
