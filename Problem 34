@@ -1,0 +1,29 @@
+#include <bits/stdc++.h>
+using namespace std;
+int fac(int n){
+    int ans=1;
+    for(int i=1;i<=n;i++){
+        ans*=i;
+    }
+    return ans;
+}
+int cal(string s){
+    long long ans=0;
+    for(int i=0;i<s.length();i++){
+        ans+=fac(s[i]-'0');
+    }
+
+    return ans;
+}
+int main()
+{
+    long long ans=0;
+    for(int i=10;i<=3265920;i++){
+        string h=to_string(i);
+        if(cal(h)==i){
+            ans+=i;
+        }
+    }
+    cout<<ans<<endl;
+    return 0;
+}
