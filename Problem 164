@@ -1,0 +1,35 @@
+#include <bits/stdc++.h>
+using namespace std;
+long long  dp[50][10][10];
+
+long long solve(int ind,int bl,int l){
+    if(dp[ind][bl][l]!=-1){
+        return dp[ind][bl][l];
+    }
+    if(ind==20){
+        return 1;
+    }
+    long long ans=0;
+    for(int i=0;i<=9;i++){
+        if(i+bl+l<=9){
+            ans+=solve(ind+1,l,i);
+        }
+    }
+    return dp[ind][bl][l]=ans;
+}
+int main()
+{
+    memset(dp,-1,sizeof(dp));
+    long long ans=0;
+    for(int i=1;i<=9;i++){
+        for(int j=0;j<=9;j++){
+            for(int k=0;k<=9;k++){
+                if(i+j+k<=9){
+                    ans+=solve(3,j,k);
+                }
+            }
+        }
+    }
+    cout<<ans<<endl;
+    return 0;
+}
